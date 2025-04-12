@@ -1,5 +1,6 @@
 import { HStack, List, ListItem, Image, Text, Spinner, Button, Heading } from '@chakra-ui/react';
-import useGenres, { Genre } from '../hooks/useGenres';
+import useGenres from '../hooks/useGenres';
+import { Genre } from "../entities/Genre";
 import getCroppedImageUrl from '../services/image-url';
 import useGameQueryStore from '../store';
 
@@ -24,8 +25,8 @@ const GenreList = () => {
                             objectFit='cover'
                             src={getCroppedImageUrl(genre.image_background)}>
                         </Image>
-                        <Button textAlign='left' whiteSpace={'normal'} fontWeight={genre.id === selectedGenreId ? 'bold' : 'normal'} 
-                        onClick={() => setSelectedGenreId(genre.id)}
+                        <Button textAlign='left' whiteSpace={'normal'} fontWeight={genre.id === selectedGenreId ? 'bold' : 'normal'}
+                            onClick={() => setSelectedGenreId(genre.id)}
                             fontSize='lg'
                             variant='ghost'>
                             {genre.name}
