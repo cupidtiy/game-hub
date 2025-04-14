@@ -6,6 +6,7 @@ import GenreList from '../components/GenreList'
 import PlatformSelector from '../components/PlatformSelector'
 import SortSelector from '../components/SortSelector'
 import useGameQueryStore from '../store'
+import PlatformList from '../components/PlatformList'
 
 const HomePage = () => {
 
@@ -25,6 +26,7 @@ const HomePage = () => {
             <Show above="lg">
                 <GridItem area='aside' paddingX={5}>
                     <GenreList />
+                    <PlatformList/>
                 </GridItem>
             </Show>
             <GridItem area='main' >

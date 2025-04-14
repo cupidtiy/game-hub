@@ -8,6 +8,7 @@ import SortSelector from '../components/SortSelector';
 import useGameQueryStore from '../store';
 import useGenres from '../hooks/useGenres';
 import GameHeading from '../components/GameHeading'; // ✅ import your heading
+import PlatformList from '../components/PlatformList';
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -45,6 +46,7 @@ const CategoryPage = () => {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList />
+          <PlatformList/>
         </GridItem>
       </Show>
       <GridItem area="main">

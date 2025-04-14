@@ -7,6 +7,7 @@ import GameHeading from '../components/GameHeading';
 import GenreList from '../components/GenreList';
 import PlatformSelector from '../components/PlatformSelector';
 import SortSelector from '../components/SortSelector';
+import PlatformList from '../components/PlatformList';
 
 const SearchPage = () => {
     const location = useLocation();
@@ -38,6 +39,7 @@ const SearchPage = () => {
             <Show above="lg">
                 <GridItem area='aside' paddingX={5}>
                     <GenreList />
+                    <PlatformList/>
                 </GridItem>
             </Show>
             <GridItem area='main' >
