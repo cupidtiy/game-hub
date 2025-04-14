@@ -1,4 +1,4 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { Button, Icon, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { BsChevronDown } from 'react-icons/bs'
 import useGameQueryStore from '../store'
 
@@ -20,7 +20,7 @@ const setSortOrder = useGameQueryStore(s=> s.setSortOrder);
 
     return (
         <Menu>
-            <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+            <MenuButton as={Button} rightIcon={ <Icon as = {BsChevronDown as React.ElementType} />}>
                 Order by: {currentSortOrder?.label || 'Relevance' }
             </MenuButton>
             <MenuList>

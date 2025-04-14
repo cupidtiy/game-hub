@@ -1,4 +1,4 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { Button, Menu, MenuButton, MenuItem, MenuList, Icon } from '@chakra-ui/react'
 import { BsChevronDown } from 'react-icons/bs'
 import usePlatforms from '../hooks/usePlatforms';
 import Platform from "../entities/Platform";
@@ -15,7 +15,7 @@ const PlatformSelector = () => {
 
     return (
         <Menu>
-            <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+            <MenuButton as={Button} rightIcon={<Icon as={BsChevronDown as React.ElementType} />}>
                 {selectedPlatform?.name || 'Platforms'}
             </MenuButton>
             <MenuList>
