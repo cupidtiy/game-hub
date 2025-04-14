@@ -1,13 +1,26 @@
-import { Grid, GridItem, Show, Box, Flex } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import GameGrid from '../components/GameGrid'
-import GameHeading from '../components/GameHeading'
-import GenreList from '../components/GenreList'
-import PlatformSelector from '../components/PlatformSelector'
-import SortSelector from '../components/SortSelector'
-import useGameQueryStore from '../store'
+import useGameQueryStore from '../store';
+import { useLocation } from 'react-router-dom';
+import { Grid, GridItem, Show, Box, Flex } from '@chakra-ui/react';
+import GameGrid from '../components/GameGrid';
+import GameHeading from '../components/GameHeading';
+import GenreList from '../components/GenreList';
+import PlatformSelector from '../components/PlatformSelector';
+import SortSelector from '../components/SortSelector';
 
-const HomePage = () => {
+const SearchPage = () => {
+    const location = useLocation();
+    const setSearchText = useGameQueryStore(s => s.setSearchText);
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const query = searchParams.get('query');
+
+        if (query) {
+            setSearchText(query);
+        }
+    }, [location.search, setSearchText]);
+
 
     return (
         <Grid templateAreas={{
@@ -40,7 +53,9 @@ const HomePage = () => {
                 <GameGrid />
 
             </GridItem>
-        </Grid>)
+        </Grid>
+    )
 }
 
-export default HomePage
+
+export default SearchPage
