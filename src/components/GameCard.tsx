@@ -1,11 +1,12 @@
-import { Card, CardBody, Heading, Image, HStack, Box, VStack, Text } from '@chakra-ui/react';
+import { Card, CardBody, Heading, Image, HStack, Box, VStack, Text, Divider } from '@chakra-ui/react';
 import PlatformIconList from './PlatformIconList';
 import CriticScore from './CriticScore';
 import getCroppedImageUrl from '../services/image-url';
 import Emoji from './Emoji';
 import { Link } from 'react-router-dom';
 import Game from '../entities/Game';
-import ReleaseDate from './ReleaseDate';
+import GameReleaseDate from './GameReleaseDate';
+import GameGenres from './GameGenres';
 
 interface Props {
     game: Game
@@ -50,9 +51,11 @@ const GameCard = ({ game }: Props) => {
             >
 
 
-                <VStack align = "stretch" spacing = {3}>
+                <VStack align="stretch" spacing={3}>
                     <Text>
-                       <ReleaseDate date={game.released}/>
+                        <GameReleaseDate date={game.released} />
+                        <Divider borderStyle='solid' borderColor="gray.600" my={2} />
+                        <GameGenres genres={game.genres} />
                     </Text>
                 </VStack>
             </Box>
