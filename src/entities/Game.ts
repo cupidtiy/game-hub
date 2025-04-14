@@ -14,5 +14,7 @@ export default interface Game {
     rating_top: number;
     description_raw: string;
     publishers: Publisher[];
+    released: string;
+    
     
 }
