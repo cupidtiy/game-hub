@@ -80,7 +80,7 @@ const SearchInput = () => {
                 //update store
                 setSearchText(searchQuery);
 
-                navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+                navigate(`/games/search?query=${encodeURIComponent(searchQuery)}`);
             }
         }}>
             <InputGroup>

@@ -9,8 +9,8 @@ const apiClient = new APIClient<Platform>('/platforms/lists/parents');
 
 const usePlatforms = () => useQuery({
     queryKey: ['platforms'],
-    queryFn: apiClient.getAll,
-    staleTime: ms('24h'), //24h
+    queryFn: () => apiClient.getAll({}),
+        staleTime: ms('24h'), //24h
     initialData: platforms
 })
     ;
