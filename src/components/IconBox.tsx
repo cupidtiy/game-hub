@@ -36,7 +36,7 @@ const IconBox = ({ icon, size = '32px', isHoverable = false }: IconBoxProps) => 
       }
     >
       <Icon
-        as={icon}
+        as={icon as React.ElementType}
         color={iconColor}
         boxSize="18px"
         transition="color 0.2s ease"
