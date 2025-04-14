@@ -13,10 +13,12 @@ const apiClient = new APIClient<Game>('/games');
 const SearchInput = () => {
     const ref = useRef<HTMLInputElement>(null);
     const setSearchText = useGameQueryStore(s => s.setSearchText);
-    const gameQuery = useGameQueryStore(s=> s.gameQuery);
+    const gameQuery = useGameQueryStore(s => s.gameQuery);
     const navigate = useNavigate();
     const location = useLocation();
     const [totalGames, setTotalGames] = useState(0);
+    //track the last pathname to detect 'same route' navigation
+    const [lastPathKey, setLastPathKey] = useState(location.key);
 
     // Fetch the total count only once when component mounts
     useEffect(() => {
@@ -36,14 +38,16 @@ const SearchInput = () => {
         fetchTotalCount();
     }, []);
 
-    //clear input field when on home page or when searchtext is empty
+    //clear input field when location changes, even to same route
     useEffect(() => {
-        if(location.pathname === '/' ||  !gameQuery.searchText){
-            if(ref.current){
+        if (location.pathname === '/') {
+            if (ref.current) {
                 ref.current.value = '';
             }
         }
-    }, [location.pathname, gameQuery.searchText]);
+        //update the path key to track when navigation occurs
+        setLastPathKey(location.key);
+    }, [location.pathname, location.key, setSearchText]);
 
     //set input value based on URL query parameter
     useEffect(() => {
