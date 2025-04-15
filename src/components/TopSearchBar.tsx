@@ -12,7 +12,7 @@ import Game from '../entities/Game';
 
 const apiClient = new APIClient<Game>('/games');
 
-const SearchInput = () => {
+const TopSearchBar = () => {
   const ref = useRef<HTMLInputElement>(null);
   const { navigateToSearch, location } = useSearchNavigation('topSearchText');
   const [totalGames, setTotalGames] = useState(0);
@@ -70,4 +70,4 @@ const SearchInput = () => {
   );
 };
 
-export default SearchInput;
+export default TopSearchBar;

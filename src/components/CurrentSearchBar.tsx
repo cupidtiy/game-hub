@@ -67,24 +67,39 @@ const CurrentSearchBar = () => {
   const showCount = searchText && !isLoading && data !== undefined;
 
   return (
-    <InputGroup>
+    <InputGroup 
+      position="relative"
+      pb={2}
+      _after={{
+        content: '""',
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: '2px',
+        bg: 'white',
+        opacity: 0.2
+      }}
+    >
       <InputLeftElement>
-        <ChakraIcon as={BsSearch as any} color="#666" boxSize={5} />
+        <ChakraIcon as={BsSearch as any} color="rgba(255, 255, 255, 0.6)" boxSize={6} />
       </InputLeftElement>
       <Input
         ref={inputRef}
         placeholder="Search games..."
-        variant="filled"
-        borderRadius="lg"
+        variant="unstyled"
         value={searchText || ''}
         onChange={handleChange}
-        size="md"
+        size="lg"
+        fontSize="2xl"
+        paddingLeft="50px"
+        paddingBottom="8px"
         paddingRight={searchText ? (showCount ? "170px" : "40px") : "4px"}
-        bg="#202020"
-        _hover={{ bg: "#252525" }}
-        _focus={{ bg: "#252525", borderColor: "gray.600" }}
         color="white"
-        border="1px solid #333"
+        _placeholder={{ 
+          color: "rgba(255, 255, 255, 0.6)",
+          fontSize: "2xl"
+        }}
       />
 
       {/* Show right elements only when there's search text */}
@@ -109,7 +124,7 @@ const CurrentSearchBar = () => {
             </Box>
 
             {showCount && (
-              <Text fontSize="sm" color="gray.500" whiteSpace="nowrap" marginRight="8px">
+              <Text fontSize="sm" color="rgba(255, 255, 255, 0.6)" whiteSpace="nowrap" marginRight="8px">
                 Found {totalCount} {totalCount === 1 ? 'item' : 'items'}
               </Text>
             )}

@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react';
 import useGameQueryStore from '../store';
 import GameGrid from '../components/GameGrid';
-import GameHeading from '../components/GameHeading';
 import GenreList from '../components/GenreList';
 import PlatformSelector from '../components/PlatformSelector';
 import SortSelector from '../components/SortSelector';
@@ -35,43 +34,44 @@ const SearchPage = () => {
     }, [location.search, setSearchText]);
 
     return (
-        <Grid
-            templateAreas={{
-                base: '"main"',
-                lg: '"aside main"'
-            }}
-            templateColumns={{
-                base: '1fr',
-                lg: '200px 1fr'
-            }}
-        >
-            <Show above="lg">
-                <GridItem area="aside" paddingX={5}>
-                    <GenreList />
-                    <PlatformList />
-                </GridItem>
-            </Show>
+        <>
+            <CurrentSearchBar />
+            <Grid
+                templateAreas={{
+                    base: '"main"',
+                    lg: '"aside main"'
+                }}
+                templateColumns={{
+                    base: '1fr',
+                    lg: '200px 1fr'
+                }}
+                gap={4}
+                p={4}
+            >
+                <Show above="lg">
+                    <GridItem area="aside" paddingX={5}>
+                        <GenreList />
+                        <PlatformList />
+                    </GridItem>
+                </Show>
 
-            <GridItem area="main">
-                <Box paddingLeft={10}>
-                    <GameHeading />
-
-                    <Flex marginBottom={5}>
-                        <Box marginRight={5}>
-                            <PlatformSelector />
+                <GridItem area="main">
+                    <Flex direction="column">
+                        <Box mb={4}>
                         </Box>
-                        <SortSelector />
+
+                        <Flex mb={4} alignItems="center">
+                            <Box marginRight={5}>
+                                <PlatformSelector />
+                            </Box>
+                            <SortSelector />
+                        </Flex>
+
+                        <GameGrid />
                     </Flex>
-
-                    <Box mb={3}>
-                        <CurrentSearchBar />
-                    </Box>
-
-                </Box>
-
-                <GameGrid />
-            </GridItem>
-        </Grid>
+                </GridItem>
+            </Grid>
+        </>
     );
 };
 
