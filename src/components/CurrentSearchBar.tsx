@@ -1,6 +1,6 @@
-import { Input, InputGroup, InputLeftElement, InputRightElement, Flex, Text } from '@chakra-ui/react';
+import { Input, InputGroup, InputLeftElement, InputRightElement, Flex, Text, Box } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
-import { BsSearch } from 'react-icons/bs';
+import { BsSearch, BsX } from 'react-icons/bs';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import useGameQueryStore from '../store';
 import useGames from '../hooks/useGames';
@@ -47,6 +47,14 @@ const CurrentSearchBar = () => {
     }
   };
 
+  const handleClear = () => {
+    // Clear the search text
+    setSearchText('');
+    
+    // Navigate back to homepage
+    navigate('/');
+  };
+
   // Focus input on mount to show blinking cursor
   useEffect(() => {
     inputRef.current?.focus();
@@ -56,13 +64,12 @@ const CurrentSearchBar = () => {
   const totalCount = data?.pages?.[0]?.count || 0;
   
   // Determine if we should show the count (when searching and data has loaded)
-  // Note: We'll always show count after loading, even if it's 0 results
   const showCount = searchText && !isLoading && data !== undefined;
   
   return (
     <InputGroup>
       <InputLeftElement>
-        <BsSearch />
+        <BsSearch color="#666" />
       </InputLeftElement>
       <Input
         ref={inputRef}
@@ -72,14 +79,40 @@ const CurrentSearchBar = () => {
         value={searchText || ''}
         onChange={handleChange}
         size="md"
-        paddingRight={showCount ? "140px" : "4px"}
+        paddingRight={searchText ? (showCount ? "170px" : "40px") : "4px"}
+        bg="#202020"
+        _hover={{ bg: "#252525" }}
+        _focus={{ bg: "#252525", borderColor: "gray.600" }}
+        color="white"
+        border="1px solid #333"
       />
-      {showCount && (
-        <InputRightElement width="auto" paddingRight="12px">
+      
+      {/* Show right elements only when there's search text */}
+      {searchText && (
+        <InputRightElement width="auto">
           <Flex alignItems="center">
-            <Text fontSize="sm" color="gray.500" whiteSpace="nowrap">
-              Found {totalCount} {totalCount === 1 ? 'item' : 'items'}
-            </Text>
+            {/* Circular clear button with X */}
+            <Box 
+              as="button"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              bg="rgba(80, 80, 80, 0.8)"
+              borderRadius="full"
+              width="24px"
+              height="24px"
+              onClick={handleClear}
+              marginRight={showCount ? "10px" : "2px"}
+              _hover={{ bg: "rgba(100, 100, 100, 0.9)" }}
+            >
+              <BsX color="white" size={18} />
+            </Box>
+            
+            {showCount && (
+              <Text fontSize="sm" color="gray.500" whiteSpace="nowrap" marginRight="8px">
+                Found {totalCount} {totalCount === 1 ? 'item' : 'items'}
+              </Text>
+            )}
           </Flex>
         </InputRightElement>
       )}
