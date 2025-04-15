@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputLeftElement, InputRightElement, Flex, Text, Box } from '@chakra-ui/react';
+import { Input, InputGroup, InputLeftElement, InputRightElement, Flex, Text, Box, Icon as ChakraIcon } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { BsSearch, BsX } from 'react-icons/bs';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
@@ -11,7 +11,7 @@ const CurrentSearchBar = () => {
   const gameQuery = useGameQueryStore(s => s.gameQuery);
   const { data, isLoading } = useGames();
   const inputRef = useRef<HTMLInputElement>(null);
-  
+
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,10 +26,10 @@ const CurrentSearchBar = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSearchText = e.target.value;
-    
+
     // Update store
     setSearchText(newSearchText);
-    
+
     // Update URL query parameter
     if (newSearchText) {
       // If we're already on the search page, just update the query param
@@ -50,7 +50,7 @@ const CurrentSearchBar = () => {
   const handleClear = () => {
     // Clear the search text
     setSearchText('');
-    
+
     // Navigate back to homepage
     navigate('/');
   };
@@ -62,14 +62,14 @@ const CurrentSearchBar = () => {
 
   // Get total count from data
   const totalCount = data?.pages?.[0]?.count || 0;
-  
+
   // Determine if we should show the count (when searching and data has loaded)
   const showCount = searchText && !isLoading && data !== undefined;
-  
+
   return (
     <InputGroup>
       <InputLeftElement>
-        <BsSearch color="#666" />
+        <ChakraIcon as={BsSearch as any} color="#666" boxSize={5} />
       </InputLeftElement>
       <Input
         ref={inputRef}
@@ -86,28 +86,28 @@ const CurrentSearchBar = () => {
         color="white"
         border="1px solid #333"
       />
-      
+
       {/* Show right elements only when there's search text */}
       {searchText && (
-        <InputRightElement width="auto">
+        <InputRightElement width="auto" paddingRight="8px">
           <Flex alignItems="center">
             {/* Circular clear button with X */}
-            <Box 
+            <Box
               as="button"
               display="flex"
               alignItems="center"
               justifyContent="center"
               bg="rgba(80, 80, 80, 0.8)"
               borderRadius="full"
-              width="24px"
-              height="24px"
+              width="30px"
+              height="30px"
               onClick={handleClear}
               marginRight={showCount ? "10px" : "2px"}
               _hover={{ bg: "rgba(100, 100, 100, 0.9)" }}
             >
-              <BsX color="white" size={18} />
+              <ChakraIcon as={BsX as any} color="white" boxSize={5} />
             </Box>
-            
+
             {showCount && (
               <Text fontSize="sm" color="gray.500" whiteSpace="nowrap" marginRight="8px">
                 Found {totalCount} {totalCount === 1 ? 'item' : 'items'}

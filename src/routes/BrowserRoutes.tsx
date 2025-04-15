@@ -19,7 +19,7 @@ const router = createBrowserRouter(
     }
   ],
   {
-    basename: '/game-hub' // ← add this!
+    basename: '/game-hub/' 
   }
 );
 
